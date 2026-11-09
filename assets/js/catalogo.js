@@ -113,7 +113,9 @@ const COR = {
 const comFoto = (cor, foto) => ({ ...cor, foto });
 
 /* Ordem da vitrine = ordem do site atual. Quem não estiver na lista aparece
-   depois, na ordem do catálogo. */
+   depois, na ordem do catálogo.
+   OCULTAR um modelo sem apagá-lo: `oculto: true` no bloco dele (some da
+   vitrine, das contagens, do modal e do JSON-LD). Para voltar, apague a linha. */
 window.DF_ORDEM = [
   'gremio', 'inter', 'fittipaldi', 'eko-pro', 'eko10', 'sidney', 'fenix', 'fox',
   'dubai', 'tokyo', 'ultra-x', 'tui-plus', 'tui', 'rio', 'x11-1000w', 'mia-tri',
@@ -159,6 +161,7 @@ const fichaMotoChefe = () => ({
 window.DF_MODELOS = [
   {
     id: 'gremio',
+    oculto: true, // por enquanto, a pedido do time interno (09/11/2026)
     wp: 'gremio',
     nome: 'Grêmio',
     fabricante: null,
@@ -174,6 +177,7 @@ window.DF_MODELOS = [
   },
   {
     id: 'inter',
+    oculto: true, // por enquanto, a pedido do time interno (09/11/2026)
     wp: 'monaco-2-2',
     nome: 'Inter',
     fabricante: 'Di Fatto',
@@ -189,6 +193,7 @@ window.DF_MODELOS = [
   },
   {
     id: 'fittipaldi',
+    oculto: true, // por enquanto, a pedido do time interno (09/11/2026)
     wp: 'monaco-2',
     nome: 'Fittipaldi',
     fabricante: 'Di Fatto',

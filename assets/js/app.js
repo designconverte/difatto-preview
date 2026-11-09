@@ -44,6 +44,10 @@
       .slice(0, 40);
   }
 
+  /* Modelo com `oculto: true` no catalogo.js some de tudo que o visitante vê
+     (vitrine, contagens, modal, JSON-LD); o dado e as fotos continuam lá. */
+  const modelosAtivos = () => (window.DF_MODELOS || []).filter((m) => !m.oculto);
+
   const nomeCompleto = (m) => [m.fabricante, m.nome].filter(Boolean).join(' ');
   const categoriasDe = (m) => m.categorias || [];
   const cardDe = (m) => (window.DF_CARDS || {})[m.id] || { src: '', alt: m.nome, w: 640, h: 536 };
@@ -104,7 +108,7 @@
     });
 
     // Números da faixa de prova contados do próprio dado: nunca envelhecem.
-    const modelos = window.DF_MODELOS || [];
+    const modelos = modelosAtivos();
     const totais = {
       modelos: modelos.length,
       'sem-cnh': modelos.filter((m) => m.classificacao === 'autopropelido').length,
@@ -362,7 +366,7 @@
     const celular = matchMedia('(max-width: 599.98px)');
 
     const modelos = () => {
-      const todos = window.DF_MODELOS || [];
+      const todos = modelosAtivos();
       const prioridade = window.DF_ORDEM || [];
       if (!prioridade.length) return todos;
       const posicao = new Map(prioridade.map((id, i) => [id, i]));
@@ -919,7 +923,7 @@
     }
 
     function abrir(id, gatilho) {
-      atual = (window.DF_MODELOS || []).find((m) => m.id === id);
+      atual = modelosAtivos().find((m) => m.id === id);
       if (!atual) return;
       if (gatilho !== undefined) origem = gatilho || null;
       corAtiva = (atual.cores || []).length === 1 ? 0 : null;
@@ -1054,10 +1058,17 @@
         else if (!e.shiftKey && document.activeElement === ultimo) { e.preventDefault(); primeiro.focus(); }
       });
 
-      /* Âncora compartilhável: /#modelo/jet abre o modal direto. */
+      /* Âncora compartilhável: /#modelo/jet abre o modal direto. Modelo que
+         não existe ou está oculto: limpa o hash e fica na página. */
       const abrirPorHash = () => {
         const hash = location.hash.match(/^#modelo\/(.+)$/);
-        if (hash) abrir(decodeURIComponent(hash[1]), null);
+        if (!hash) return;
+        const id = decodeURIComponent(hash[1]);
+        if (!modelosAtivos().some((m) => m.id === id)) {
+          history.replaceState(null, '', location.pathname + location.search);
+          return;
+        }
+        abrir(id, null);
       };
       addEventListener('hashchange', abrirPorHash);
       requestAnimationFrame(abrirPorHash);
