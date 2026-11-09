@@ -57,22 +57,36 @@ window.DF_CONFIG = {
     facebook: 'https://www.facebook.com/difattoscooters',
   },
 
-  /* Mensagens pré-preenchidas. As de modelo, geral e assistência são as do
-     site atual, palavra por palavra: é por elas que a equipe reconhece o lead
-     que vem do site. No WordPress o fim da frase saía "[site_title]" (o
-     shortcode não era trocado); aqui sai o nome da loja.
-     `{modelo}`, `{cor}` e `{categoria}` são trocados na hora do clique. */
+  /* De onde a visita veio, para a mensagem dizer "Vim pelo Instagram" e a
+     equipe separar os leads (pedido do usuário, 09/11/2026). Lê o
+     `utm_source` da URL (sem diferenciar maiúsculas) e o guarda até a aba
+     fechar; fonte fora do mapa, ou visita sem UTM, vira `padrao`.
+     Para incluir outra rede: uma linha em `porFonte` (ex.: tiktok: 'TikTok'). */
+  origem: {
+    parametro: 'utm_source',
+    padrao: 'site',
+    porFonte: {
+      ig: 'Instagram',
+      instagram: 'Instagram',
+      fb: 'Facebook',
+      facebook: 'Facebook',
+    },
+  },
+
+  /* Mensagens pré-preenchidas, no formato dos projetos de referência:
+     "Olá! Vim pelo {origem} e …". `{origem}`, `{modelo}`, `{cor}` e
+     `{categoria}` são trocados na hora do clique (assets/js/whats.js). */
   prefixoMensagem: '',
   mensagens: {
-    geral: 'Olá! Gostaria de saber mais sobre os modelos e condições especiais da DiFatto Scooters Elétricas.',
-    produtos: 'Olá, gostaria de saber mais sobre os Produtos da DiFatto Scooters Elétricas.',
-    modelo: 'Olá, gostaria de saber mais sobre o modelo {modelo}',
-    modeloCor: 'Olá, gostaria de saber mais sobre o modelo {modelo} na cor {cor}',
-    testRideGeral: 'Olá! Gostaria de agendar um test ride na DiFatto Scooters Elétricas.',
-    testRideModelo: 'Olá! Gostaria de agendar um test ride do modelo {modelo}.',
-    testRideModeloCor: 'Olá! Gostaria de agendar um test ride do modelo {modelo} na cor {cor}.',
-    escolher: 'Olá! Quero ajuda para escolher a scooter certa para a minha rotina.',
-    assistencia: 'Olá, gostaria de falar com o time de Assistência Técnica da DiFatto Scooters Elétricas.',
-    categoria: 'Olá! Gostaria de ver as opções de {categoria} da DiFatto Scooters Elétricas.',
+    geral: 'Olá! Vim pelo {origem} e gostaria de saber mais sobre os modelos e condições especiais da DiFatto Scooters Elétricas.',
+    produtos: 'Olá! Vim pelo {origem} e gostaria de saber mais sobre os produtos da DiFatto Scooters Elétricas.',
+    modelo: 'Olá! Vim pelo {origem} e gostaria de saber mais sobre o modelo {modelo}.',
+    modeloCor: 'Olá! Vim pelo {origem} e gostaria de saber mais sobre o modelo {modelo} na cor {cor}.',
+    testRideGeral: 'Olá! Vim pelo {origem} e gostaria de agendar um test ride na DiFatto Scooters Elétricas.',
+    testRideModelo: 'Olá! Vim pelo {origem} e gostaria de agendar um test ride do modelo {modelo}.',
+    testRideModeloCor: 'Olá! Vim pelo {origem} e gostaria de agendar um test ride do modelo {modelo} na cor {cor}.',
+    escolher: 'Olá! Vim pelo {origem} e quero ajuda para escolher a scooter certa para a minha rotina.',
+    assistencia: 'Olá! Vim pelo {origem} e gostaria de falar com o time de Assistência Técnica da DiFatto Scooters Elétricas.',
+    categoria: 'Olá! Vim pelo {origem} e gostaria de ver as opções de {categoria} da DiFatto Scooters Elétricas.',
   },
 };

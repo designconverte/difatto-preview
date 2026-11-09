@@ -14,9 +14,9 @@
 <link rel="apple-touch-icon" href="assets/img/brand/apple-touch-icon.png">
 <link rel="preconnect" href="https://use.typekit.net" crossorigin>
 <link rel="stylesheet" href="https://use.typekit.net/huq4gym.css">
-<link rel="stylesheet" href="assets/css/difatto.css?v=1.0.6">
+<link rel="stylesheet" href="assets/css/difatto.css?v=1.0.7">
 
-<script src="assets/js/consent.js?v=1.0.6"></script>
+<script src="assets/js/consent.js?v=1.0.7"></script>
 <script>
   (function () {
     var h = document.documentElement;
@@ -134,6 +134,7 @@
             <tr><td><code>df:consentimento</code></td><td>DiFatto</td><td>Guarda a sua escolha sobre cookies, para não perguntar de novo a cada visita.</td><td>Até você limpar o navegador</td></tr>
             <tr><td><code>df:sessao</code></td><td>DiFatto</td><td>Agrupa as ações de uma mesma visita. Expira sozinho.</td><td>30 minutos sem uso</td></tr>
             <tr><td><code>df:balao</code></td><td>DiFatto</td><td>Lembra que você já viu a mensagem de boas-vindas nesta visita.</td><td>Até fechar a aba</td></tr>
+            <tr><td><code>df:utm_source</code></td><td>DiFatto</td><td>Lembra de onde a visita veio (por exemplo, Instagram), para a mensagem pronta do WhatsApp dizer "Vim pelo Instagram". Não guarda dado pessoal.</td><td>Até fechar a aba</td></tr>
             <tr><td><code>_ga</code>, <code>_ga_*</code></td><td>Google Analytics</td><td>Medição de audiência. Deixam de ser criados se você optar por só o essencial.</td><td>Até 24 meses</td></tr>
             <tr><td><code>_gcl_*</code> e similares</td><td>Google Ads</td><td>Medição e remarketing de anúncios do Google. Deixam de ser criados se você optar por só o essencial.</td><td>Até 90 dias</td></tr>
             <tr><td><code>_fbp</code>, <code>_fbc</code></td><td>Meta, quando ativada</td><td>Medição de anúncios do Facebook e do Instagram. Deixam de ser criados se você optar por só o essencial.</td><td>Até 90 dias</td></tr>
@@ -243,10 +244,12 @@
   </div>
 </div>
 
-<script src="assets/js/config.js?v=1.0.6"></script>
+<script src="assets/js/config.js?v=1.0.7"></script>
+<script src="assets/js/whats.js?v=1.0.7"></script>
 <script>
   /* O app.js não entra aqui: ele monta vitrine, modal e mapa, que esta página
-     não tem. O que ela precisa são só os dados da loja no HTML. */
+     não tem. O que ela precisa são os dados da loja no HTML e os links do
+     WhatsApp, montados pelo mesmo whats.js do site ("Vim pelo…"). */
   (function () {
     var cfg = window.DF_CONFIG;
     var pegar = function (caminho) {
@@ -259,10 +262,7 @@
       el.href = pegar(el.dataset.configHref) || '#';
     });
     document.querySelectorAll('[data-whats]').forEach(function (el) {
-      var texto = cfg.mensagens[el.dataset.whats] || cfg.mensagens.geral;
-      var prefixo = cfg.prefixoMensagem;
-      if (prefixo && texto.toLowerCase().indexOf(prefixo.toLowerCase()) !== 0) texto = prefixo + '. ' + texto;
-      el.href = 'https://wa.me/' + cfg.whatsapp.e164 + '?text=' + encodeURIComponent(texto);
+      el.href = window.DF_WHATS.link(el.dataset.whats);
       el.target = '_blank';
       el.rel = 'noopener';
     });

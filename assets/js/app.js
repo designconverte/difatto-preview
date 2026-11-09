@@ -76,17 +76,9 @@
     emitir(slugEvento(`btn_interesse_${nomeCompleto(modelo)}`), dados, { somenteGa4: true });
   }
 
-  /** Monta o link do WhatsApp com a mensagem já preenchida. */
-  function linkWhats(chave, trocas = {}) {
-    let texto = cfg.mensagens[chave] || cfg.mensagens.geral;
-    for (const [k, v] of Object.entries(trocas)) {
-      texto = texto.replaceAll(`{${k}}`, v);
-    }
-    const prefixo = cfg.prefixoMensagem;
-    if (prefixo && !texto.toLowerCase().startsWith(prefixo.toLowerCase())) texto = `${prefixo}. ${texto}`;
-    const numero = chave === 'assistencia' ? (cfg.assistencia?.e164 || cfg.whatsapp.e164) : cfg.whatsapp.e164;
-    return `https://wa.me/${numero}?text=${encodeURIComponent(texto)}`;
-  }
+  /* Link do WhatsApp com a mensagem já preenchida ("Olá! Vim pelo {origem} e
+     …"): o construtor mora em whats.js, o mesmo da privacidade.html. */
+  const linkWhats = (chave, trocas = {}) => window.DF_WHATS.link(chave, trocas);
 
   /* ── 1. Dados da loja no HTML ─────────────────────────────────────────── */
 
