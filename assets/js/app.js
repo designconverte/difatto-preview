@@ -21,6 +21,11 @@
     { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]
   ));
 
+  /* `**trecho**` vira <strong>. SEGURANÇA: escapa o texto inteiro ANTES; o par
+     de asteriscos é a única marcação aceita, então nada do dado vira HTML. */
+  const comNegrito = (texto) => escapar(texto).replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+  const semMarcacao = (texto) => String(texto).replace(/\*\*(.+?)\*\*/g, '$1');
+
   const semMovimento = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
   const real = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' });
 
@@ -933,7 +938,7 @@
       $('#modal-selo').innerHTML = selos(atual, 'selos--modal');
       $('#modal-legal').textContent = atual.classificacao === 'autopropelido'
         ? 'Veículo autopropelido | CONTRAN 996/23'
-        : 'Ciclomotor · exige CNH e emplacamento';
+        : 'Ciclomotor · exige habilitação (ACC ou A), registro e licenciamento';
 
       const tags = $('#modal-tags');
       tags.textContent = (atual.tags || []).length ? `Perfil: ${atual.tags.join(', ').toLowerCase()}.` : '';
@@ -1092,7 +1097,7 @@
           </button>
         </h3>
         <div class="faq__resposta" id="faq-r${i}" role="region" aria-labelledby="faq-q${i}">
-          <div><p>${escapar(f.a)}</p></div>
+          <div><p>${comNegrito(f.a)}</p></div>
         </div>
       </div>`).join('');
 
@@ -1160,7 +1165,7 @@
       scripts.push({
         '@context': 'https://schema.org',
         '@type': 'FAQPage',
-        mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+        mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: semMarcacao(f.a) } })),
       });
     }
 

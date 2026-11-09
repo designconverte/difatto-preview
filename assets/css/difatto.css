@@ -683,6 +683,10 @@ a:hover { color: var(--df-ink); }
   line-height: 1.1;
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
+  /* O complemento ("a R$ 1,50", "e cartão") desce de linha antes de estourar
+     a coluna no celular, em vez de passar por cima do vizinho. */
+  flex-wrap: wrap;
+  row-gap: 2px;
 }
 .prova__numero small { font-size: .45em; color: var(--df-red-400); letter-spacing: .06em; }
 .prova__rotulo { margin: 0; color: var(--df-gray-300); font-size: 12px; line-height: 1.45; }
@@ -1104,6 +1108,8 @@ a:hover { color: var(--df-ink); }
 .faq__item.is-aberto .faq__resposta { grid-template-rows: 1fr; }
 .faq__resposta > div { overflow: hidden; }
 .faq__resposta p { margin: 0; padding: 0 40px 18px 8px; color: var(--df-gray-600); font-size: 14px; line-height: 1.65; max-width: 72ch; }
+/* Negritos do texto da loja: os convites para falar com um consultor. */
+.faq__resposta strong { color: var(--df-ink); font-weight: 700; }
 .faq__cta { display: flex; margin-top: var(--sp-8); }
 
 /* ── rodapé ────────────────────────────────────────────────────────────── */

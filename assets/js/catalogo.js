@@ -54,7 +54,7 @@ window.DF_CATEGORIAS = [
   {
     id: 'ciclomotor',
     nome: 'Ciclomotores',
-    nota: 'Mais potência e velocidade. Ciclomotores exigem CNH e emplacamento.',
+    nota: 'Mais potência e velocidade. Ciclomotores exigem habilitação (ACC ou categoria A), registro e licenciamento.',
   },
   {
     id: 'scooter',
@@ -75,7 +75,7 @@ window.DF_CLASSIFICACOES = {
     selos: [{ t: 'Sem CNH', tom: 'livre' }, { t: 'Sem emplacamento', tom: 'livre' }],
   },
   ciclomotor: {
-    selos: [{ t: 'Requer CNH', tom: 'exige' }, { t: 'Emplacamento', tom: 'exige' }],
+    selos: [{ t: 'Requer habilitação', tom: 'exige' }, { t: 'Emplacamento', tom: 'exige' }],
   },
 };
 
@@ -577,56 +577,50 @@ window.DF_MODELOS = [
   },
 ];
 
-/* FAQ do site atual, as doze perguntas na ordem de lá. Revisão mínima de
-   texto (concordância, acentos e a sigla da resolução por extenso). */
+/* FAQ corrigido pelo time interno da DiFatto (09/11/2026), as dez perguntas
+   na ordem e com as palavras de lá. `**trecho**` é negrito: o app.js escapa o
+   texto e só então transforma o par de asteriscos em <strong>; no JSON-LD os
+   asteriscos saem. */
 window.DF_FAQ = [
   {
-    q: 'Quais modelos não precisam de CNH e emplacamento?',
-    a: 'Nossos modelos autopropelidos e bikes se enquadram corretamente na legislação; por isso, não exigem CNH nem emplacamento. Autopropelidos: largura de até 70 cm, eixo de 1,28 m, motor de até 1.000 W e velocidade de até 32 km/h, conforme a Resolução CONTRAN nº 996.',
+    q: 'Preciso de CNH ou emplacamento?',
+    a: 'Os modelos classificados como equipamentos autopropelidos ou bicicletas elétricas, conforme os critérios da Resolução CONTRAN nº 996/2023, dispensam CNH e emplacamento. Quer saber quais modelos se enquadram? Consulte um de nossos especialistas!',
   },
   {
-    q: 'Vocês possuem modelos homologados?',
-    a: 'Todos os nossos modelos são homologados e atendem às normativas vigentes em nossa legislação.',
+    q: 'Qual a diferença entre uma scooter autopropelida e um ciclomotor?',
+    a: 'A principal diferença está nas características técnicas e nas exigências legais. Os equipamentos autopropelidos que atendem à legislação, Resolução CONTRAN nº 996/2023 dispensam CNH e emplacamento. Já os ciclomotores exigem habilitação (ACC ou categoria A), registro e licenciamento. **Quer descobrir qual modelo é ideal para você? Converse com um de nossos consultores!**',
   },
   {
-    q: 'Vocês vendem as peças para a manutenção das scooters?',
-    a: 'Temos o maior estoque de motos e peças para atender a reposição imediata na manutenção da sua scooter.',
+    q: 'Quantos quilômetros consigo percorrer com uma carga?',
+    a: 'A autonomia varia conforme o modelo, peso transportado, terreno, velocidade e condições de uso. **Conte para nossos consultores como pretende utilizar sua scooter e descubra qual modelo atende melhor às suas necessidades!**',
   },
   {
-    q: 'É obrigatório o uso de capacete?',
-    a: 'Recomendamos fortemente o uso por segurança. Se você quiser, também te indicamos os itens essenciais para rodar com mais proteção.',
+    q: 'Quanto custa carregar uma scooter elétrica?',
+    a: 'Uma recarga completa custa, em média, de **R$ 1,00 a R$ 1,50**. Esse valor é estimado e pode variar, inclusive para mais, conforme o modelo, a capacidade da bateria e a tarifa de energia da sua região.',
   },
   {
-    q: 'Vocês têm assistência técnica?',
-    a: 'Sim. Nossa loja conta com uma oficina toda equipada, além de estoque de peças para reposição imediata e mão de obra qualificada, feita por técnicos especializados.',
+    q: 'Quanto tempo demora para carregar?',
+    a: 'O tempo de recarga varia conforme o modelo, a capacidade da bateria e o carregador utilizado. **Quer saber quanto tempo leva para carregar a sua scooter? Converse com um de nossos consultores!**',
   },
   {
-    q: 'Qual é o tempo de recarga completa?',
-    a: 'Varia por bateria e modelo. Em geral, a recarga pode levar algumas horas. Antes da compra, te informamos o tempo estimado do modelo que você está vendo.',
+    q: 'As scooters possuem bateria de lítio?',
+    a: 'Trabalhamos com diferentes tecnologias de bateria, incluindo lítio. Cada uma possui características específicas de autonomia, peso e durabilidade.',
   },
   {
-    q: 'Quanto gasto de luz para carregar minha scooter?',
-    a: 'Você gasta menos de R$ 5,00 para uma recarga completa.',
+    q: 'Como devo limpar minha scooter?',
+    a: 'Utilize um pano macio e levemente úmido, evitando jatos de água, produtos abrasivos e contato direto com componentes elétricos. Após utilizar a scooter na chuva, seque-a para ajudar na conservação.',
   },
   {
-    q: 'Como faço a limpeza da minha scooter?',
-    a: 'Nossas scooters contam com índice de proteção (IP65), que possibilita não só a lavagem a seco, como também a lavagem com água corrente para uma limpeza melhor.',
+    q: 'Vocês oferecem assistência técnica e peças?',
+    a: 'Sim! Contamos com assistência técnica especializada e estoque de peças para manutenção e reposição, conforme a disponibilidade de cada componente. **Precisou de assistência? Entre em contato com nossa equipe!**',
+  },
+  {
+    q: 'É obrigatório usar capacete?',
+    a: 'A obrigatoriedade depende da categoria do veículo e das regras aplicáveis à circulação. Independentemente da exigência legal, recomendamos o uso de capacete adequado para maior segurança.',
   },
   {
     q: 'Quais são as formas de pagamento?',
-    a: 'Até 12x sem juros no cartão de crédito, dinheiro, PIX ou transferência bancária.',
-  },
-  {
-    q: 'Posso carregar minha moto em tomada 110V e 220V?',
-    a: 'Em ambas, pois nossas scooters são bivolt.',
-  },
-  {
-    q: 'As baterias são de lítio?',
-    a: 'Sim! Elas são muito mais leves do que outros tipos de bateria do mesmo tamanho e têm vantagens em relação às de chumbo: maior ciclo de vida, maior eficiência de carga e descarga e menor tempo de carregamento. Além disso, a maioria das peças das baterias de lítio é reciclável, o que as torna ótimas opções para o meio ambiente.',
-  },
-  {
-    q: 'Motivos para comprar uma scooter elétrica',
-    a: 'Veículo autossustentável que te ajuda a otimizar o seu tempo, economizar dinheiro e ainda cuidar do meio ambiente.',
+    a: 'Aceitamos PIX, dinheiro, transferência bancária e cartão de crédito, com opções de parcelamento conforme as condições comerciais vigentes. **Fale com nossos consultores e confira as condições disponíveis para o modelo desejado!**',
   },
 ];
 
